@@ -2,9 +2,9 @@ package wc;
 import java.io.*;
 public class BasicCount {
 
-	private static int characterNumber=1;//×Ö·ûÊı
-	private static int wordNumber=1;//µ¥´ÊÊı
-	private static int lineNumber=0;//ĞĞÊı
+	private static int characterNumber=1;//å­—ç¬¦æ•°
+	private static int wordNumber=1;//å•è¯æ•°
+	private static int lineNumber=0;//è¡Œæ•°
 
 	public static void count(String fileName)throws IOException
 	{
