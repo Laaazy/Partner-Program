@@ -1,5 +1,5 @@
 package wc;
-//¶ÔÓ¦-s²ÎÊı
+//å¯¹åº”-så‚æ•°
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -10,14 +10,14 @@ public class Traversal {
 		List<File> fileList=new ArrayList<File>();
 		//System.out.println(file1.getName());
 		//System.out.println(file1.getPath());
-		File file2 =new File(fileDir);
-        File[] files = file2.listFiles();// »ñÈ¡Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼ş»òÎÄ¼ş¼Ğ  
-        if (files == null) {// Èç¹ûÄ¿Â¼Îª¿Õ£¬Ö±½ÓÍË³ö  
+		File file =new File(fileDir);
+        File[] files = file.listFiles();// è·å–ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹  
+        if (files == null) {// å¦‚æœç›®å½•ä¸ºç©ºï¼Œç›´æ¥é€€å‡º  
             return;  
         }  
-        // ±éÀú£¬Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼ş  
+        // éå†ï¼Œç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶  
         for (File f : files) {  
-            if (f.isFile()) {  
+            if (f.isFile()&&f.getName().matches("^[\\w.]*\\.c$")) {  
                 fileList.add(f);  
             } else if (f.isDirectory()) {  
                 //System.out.println(f.getAbsolutePath());  
@@ -29,27 +29,28 @@ public class Traversal {
         		if(order.equals("-s")){
         		}
         		else if(order.equals("-c")) {
-        			//´Ë´¦µ÷ÓÃ×Ö·ûÊıÍ³¼Æº¯Êı
-        			BasicCount.count(f1.getName());
-        			System.out.println("ÎÄ¼ş£º"+f1.getName());
-        			System.out.println("×Ö·ûÊı"+BasicCount.getCharacterNumber());
+        			//æ­¤å¤„è°ƒç”¨å­—ç¬¦æ•°ç»Ÿè®¡å‡½æ•°
+        			System.out.println("æ–‡ä»¶ï¼š"+f1.getName());
+        			BasicCount.count(f1.getAbsolutePath());
+        			//System.out.println("æ–‡ä»¶ï¼š"+f1.getName());
+        			System.out.println("å­—ç¬¦æ•°"+BasicCount.getCharacterNumber());
         		}
         		else if(order.equals("-w")) {
-        			//´Ë´¦µ÷ÓÃµ¥´ÊÊıÍ³¼Æº¯Êı
+        			//æ­¤å¤„è°ƒç”¨å•è¯æ•°ç»Ÿè®¡å‡½æ•°
         			BasicCount.count(f1.getName());
-        			System.out.println("µ¥´ÊÊı"+BasicCount.getWordNumber());
+        			System.out.println("å•è¯æ•°"+BasicCount.getWordNumber());
         		}
         		else if(order.equals("-l")) {
-        			//´Ë´¦µ÷ÓÃĞĞÊıÍ³¼Æº¯Êı
+        			//æ­¤å¤„è°ƒç”¨è¡Œæ•°ç»Ÿè®¡å‡½æ•°
         			BasicCount.count(f1.getName());
-        			System.out.println("ĞĞÊı"+BasicCount.getLineNumber());
+        			System.out.println("è¡Œæ•°"+BasicCount.getLineNumber());
         		}
         		else if(order.equals("-a")) {
-        			//´Ë´¦µ÷ÓÃCheckÀàµÄcheckMore()·½·¨
+        			//æ­¤å¤„è°ƒç”¨Checkç±»çš„checkMore()æ–¹æ³•
         			Check.checkMore(f1);
         		}
         	}
-           // System.out.println(f1.getName());//½Ó¿Úµ÷ÓÃÊ±¸ü¸ÄÎªÍ³¼Æ·½·¨  
+           // System.out.println(f1.getName());//æ¥å£è°ƒç”¨æ—¶æ›´æ”¹ä¸ºç»Ÿè®¡æ–¹æ³•  
         }  
 	}
 }
