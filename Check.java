@@ -1,33 +1,46 @@
 package wc;
-//¶ÔÓ¦-a²ÎÊı
+//å¯¹åº”-aå‚æ•°
 import java.io.*;
 
 public class Check {
-	 private static int whiteLines = 0;  //¿Õ°×ĞĞ
-	 private static int commentLines = 0;  //×¢ÊÍĞĞ
-	 private static int normalLines = 0;  //´úÂëĞĞ
+	 private static int whiteLines = 0;  //ç©ºç™½è¡Œ
+	 private static int commentLines = 0;  //æ€»æ³¨é‡Šè¡Œ
+	 //private static int commentLines_1 = 0;  //å¤šè¡Œæ³¨é‡Šè¡Œ
+	 //private static int commentLines_2 = 0;  //å•è¡Œæ³¨é‡Šè¡Œ
+	 private static int normalLines = 0;  //ä»£ç è¡Œ
 	
 	 public static void checkMore(File file) {   
 	        BufferedReader br = null;   
-	        boolean comment = false;  //×¢ÊÍĞĞ±êÖ¾±äÁ¿ 
+	        boolean comment = false;  //æ³¨é‡Šè¡Œæ ‡å¿—å˜é‡ 
 	        try {   
 	            br = new BufferedReader(new FileReader(file));   
 	            String line = "";   
 	            try {   
 	                while ((line = br.readLine()) != null) {   
+	                	//String s=new String("	Hello	");
+	                	//System.out.println(s);
+	                	//s=s.trim();
+	                	//System.out.println(s);
 	                    line = line.trim();   
-	                    if (line.matches("^[\\s&&[^\\n]]*$")) {   //ÕıÔòÆ¥Åä
-	                        whiteLines++;   
-	                    } else if (line.startsWith("/*") && !line.endsWith("*/")) {   //¶àĞĞ×¢ÊÍ
-	                        commentLines++;   
+	                    if (line.matches("^[\\s&&[^\\n]]*$")||line.equals("{")||line.equals("}")||line.equals(";")) {   //æ­£åˆ™åŒ¹é…
+	                        whiteLines++;
+	                        if(comment==true) {
+	                        	commentLines++;
+	                        	//commentLines_1++;
+	                        }
+	                    } else if (line.startsWith("/*") && !line.endsWith("*/")) {   //å¤šè¡Œæ³¨é‡Š
+	                        commentLines++;
+	                       // commentLines_1++;
 	                        comment = true;   
 	                    } else if (true == comment) {   
 	                        commentLines++;   
+	                        //commentLines_1++;
 	                        if (line.endsWith("*/")) {   
 	                            comment = false;   
 	                        }   
-	                    } else if (line.startsWith("//")||(line.startsWith("/*")&&line.endsWith("*/"))) {  //  //ºÍ/**/µÄµ¥ĞĞ×¢ÊÍ 
+	                    } else if (line.startsWith("//")||(line.startsWith("/*")&&line.endsWith("*/"))) {  //  //å’Œ/**/çš„å•è¡Œæ³¨é‡Š 
 	                            commentLines++;   
+	                            //commentLines_2++;
 	                    } else {   
 	                        normalLines++;   
 	                    }   
@@ -40,9 +53,12 @@ public class Check {
 	        } finally {   
 	            if (br != null) {   
 	                try {   
-	                    System.out.println("¿ÕĞĞÊı£º"+whiteLines);  
-	                    System.out.println("×¢ÊÍĞĞÊı£º"+commentLines);  
-	                    System.out.println("´úÂëĞĞÊı£º"+normalLines);  
+	                	System.out.println("æ–‡ä»¶ï¼š"+file.getName());
+	                    System.out.println("ç©ºè¡Œæ•°ï¼š"+whiteLines);  
+	                    System.out.println("æ³¨é‡Šè¡Œæ•°ï¼š"+commentLines);
+	                    //System.out.println("å•è¡Œæ³¨é‡Šè¡Œæ•°ï¼š"+commentLines_2);
+	                    //System.out.println("å¤šè¡Œæ³¨é‡Šè¡Œæ•°ï¼š"+commentLines_1);
+	                    System.out.println("ä»£ç è¡Œæ•°ï¼š"+normalLines);  
 	                    br.close();   
 	                    br = null;   
 	                } catch (IOException e) {   
