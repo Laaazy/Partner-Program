@@ -17,7 +17,7 @@ public class Traversal {
         }  
         // 遍历，目录下的所有文件  
         for (File f : files) {  
-            if (f.isFile()&&f.getName().matches("^[\\w.]*\\.c$")) {  
+            if (f.isFile()&&f.getName().matches("^[\\w.]*\\.c$")) {//递归处理所有.c文件  
                 fileList.add(f);  
             } else if (f.isDirectory()) {  
                 //System.out.println(f.getAbsolutePath());  
@@ -32,18 +32,19 @@ public class Traversal {
         			//此处调用字符数统计函数
         			System.out.println("文件："+f1.getName());
         			BasicCount.count(f1.getAbsolutePath());
-        			//System.out.println("文件："+f1.getName());
-        			System.out.println("字符数"+BasicCount.getCharacterNumber());
+        			System.out.println("字符数:"+BasicCount.getCharacterNumber());
         		}
         		else if(order.equals("-w")) {
         			//此处调用单词数统计函数
+        			System.out.println("文件："+f1.getName());
         			BasicCount.count(f1.getName());
-        			System.out.println("单词数"+BasicCount.getWordNumber());
+        			System.out.println("单词数:"+BasicCount.getWordNumber());
         		}
         		else if(order.equals("-l")) {
         			//此处调用行数统计函数
+        			System.out.println("文件："+f1.getName());
         			BasicCount.count(f1.getName());
-        			System.out.println("行数"+BasicCount.getLineNumber());
+        			System.out.println("行数:"+BasicCount.getLineNumber());
         		}
         		else if(order.equals("-a")) {
         			//此处调用Check类的checkMore()方法
