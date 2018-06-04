@@ -1,36 +1,42 @@
 package wc;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException
+	{	
 		for(String order:args) {
 			if(order.equals("-s")) {
 				File file=new File("");
-				//File file_2=new File(file_1,"src");
-				//System.out.println(file.getAbsolutePath()+"\\src");
 				Traversal.read(file.getAbsolutePath()+"\\src", args);
 				break;
 			}
-			else if(order.equals("-c")) {
-    			//´Ë´¦µ÷ÓÃ×Ö·ûÊıÍ³¼Æº¯Êı
-    			BasicCount.count(args[args.length-1]);
-    			System.out.println("×Ö·ûÊı"+BasicCount.getCharacterNumber());
+			BasicCount f=new BasicCount();
+			if(args[args.length-1].length()!=2&&!args[args.length-1].equals("*.c"))
+			{
+				f.count(args[args.length-1]);
+			}
+
+			if(order.equals("-c")) {
+				System.out.println("æ–‡ä»¶:"+args[args.length-1]);
+    			System.out.println("å­—ç¬¦æ•°:"+f.getCharacterNumber());
     		}
     		else if(order.equals("-w")) {
-    			//´Ë´¦µ÷ÓÃµ¥´ÊÊıÍ³¼Æº¯Êı
-    			BasicCount.count(args[args.length-1]);
-    			System.out.println("µ¥´ÊÊı"+BasicCount.getWordNumber());
+    			System.out.println("æ–‡ä»¶:"+args[args.length-1]);
+    			System.out.println("å•è¯æ•°:"+f.getWordNumber());
     		}
     		else if(order.equals("-l")) {
-    			//´Ë´¦µ÷ÓÃĞĞÊıÍ³¼Æº¯Êı
-    			BasicCount.count(args[args.length-1]);
-    			System.out.println("ĞĞÊı"+BasicCount.getLineNumber());
+    			System.out.println("æ–‡ä»¶:"+args[args.length-1]);
+    			System.out.println("è¡Œæ•°:"+f.getLineNumber());
     		}
     		else if(order.equals("-a")) {
-    			//´Ë´¦µ÷ÓÃCheckÀàµÄcheckMore()·½·¨
     			Check.checkMore(new File(args[args.length-1]));
+    		}
+    		else if(order.equals("-x")) {
+    			new GUI();
     		}
 		}
 	}
