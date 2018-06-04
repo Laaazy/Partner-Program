@@ -1,47 +1,66 @@
 package wc;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 public class BasicCount {
 
-	private static int characterNumber=1;//字符数
-	private static int wordNumber=1;//单词数
-	private static int lineNumber=0;//行数
+	private int characterNumber;//字符数
+	private int wordNumber;//单词数
+	private int lineNumber;//行数
 
-	public static void count(String fileName)throws IOException
+	public BasicCount()
 	{
-		int c=0;
-		boolean lastNotWhite=false;
-		String WhiteSpace="\t\n\r";
-		File file=new File(fileName);
-		Reader reader=new InputStreamReader(new FileInputStream(file));
-		while((c=reader.read())!=-1)
+		characterNumber=0;
+		wordNumber=0;
+		lineNumber=0;
+	}
+	public void count(String fileName)throws IOException
+	{
+		
+		BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
+		
+		 while(br.read()!=-1)
 		{
-			characterNumber++;
-			if(c=='\n') {
-				lineNumber++;
-			}
-			if(WhiteSpace.indexOf(c)!=-1)
-			{
-				if(lastNotWhite)
-				{
-					wordNumber++;
-				}
-			}
-			else {
-					lastNotWhite=true;
-				}
+			String s=br.readLine();
+			characterNumber+=s.length();
+		    wordNumber+=getLineWord(s);
+			lineNumber++;
 		}
+		br.close();
 		return;
 	}
-   public static int getCharacterNumber()
+	public static int getLineWord(String s)
+	{
+		int w=0;
+		for(int i=0;i<s.length();i++)
+		{
+			s.charAt(i);
+			if ((s.charAt(i) >= 'a'&&s.charAt(i) <= 'z') || (s.charAt(i) >= 'A'&&s.charAt(i) <= 'Z'))
+			{
+				while (i<s.length()&&((s.charAt(i) >= 'a'&&s.charAt(i) <= 'z') || (s.charAt(i) >= 'A'&&s.charAt(i) <= 'Z') || (s.charAt(i)>= '0'&&s.charAt(i)<= '9') || s.charAt(i) == '_'))
+				{
+					i++;
+				}
+				w++;
+			}
+		}
+		return w;
+	
+	}
+   public int getCharacterNumber()
    {
 	   return characterNumber;
    }
-   public static int getWordNumber()
+   public int getWordNumber()
 
    {
 	   return wordNumber;
    }
-   public static int getLineNumber()
+   public int getLineNumber()
    {
 	   return lineNumber;
    }
