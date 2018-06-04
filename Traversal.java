@@ -1,4 +1,5 @@
 package wc;
+
 //对应-s参数
 import java.io.File;
 import java.io.IOException;
@@ -26,25 +27,28 @@ public class Traversal {
         }  
         for (File f1 : fileList) {  
         	for(String order:orders) {
+        		BasicCount a=new BasicCount();
         		if(order.equals("-s")){
         		}
         		else if(order.equals("-c")) {
         			//此处调用字符数统计函数
+   
+        			
         			System.out.println("文件："+f1.getName());
-        			BasicCount.count(f1.getAbsolutePath());
-        			System.out.println("字符数:"+BasicCount.getCharacterNumber());
+        			a.count(f1.getAbsolutePath());
+        			System.out.println("字符数:"+a.getCharacterNumber());
         		}
         		else if(order.equals("-w")) {
         			//此处调用单词数统计函数
         			System.out.println("文件："+f1.getName());
-        			BasicCount.count(f1.getName());
-        			System.out.println("单词数:"+BasicCount.getWordNumber());
+        			a.count(f1.getName());
+        			System.out.println("单词数:"+a.getWordNumber());
         		}
         		else if(order.equals("-l")) {
         			//此处调用行数统计函数
         			System.out.println("文件："+f1.getName());
-        			BasicCount.count(f1.getName());
-        			System.out.println("行数:"+BasicCount.getLineNumber());
+        			a.count(f1.getName());
+        			System.out.println("行数:"+a.getLineNumber());
         		}
         		else if(order.equals("-a")) {
         			//此处调用Check类的checkMore()方法
